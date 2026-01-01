@@ -17,42 +17,48 @@ class _OnboardingStepTypeScreenState extends State<OnboardingStepTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Какой формат вам подходит?',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+    final theme = Theme.of(context);
+    return Container(
+      color: Colors.transparent,
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Для кого JUP?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF323755),
             ),
-            const SizedBox(height: 32),
-            OnboardingOptionTile(
-              title: 'Пара',
-              isSelected: _selectedType == OnboardingType.couple,
-              onTap: () => setState(() => _selectedType = OnboardingType.couple),
-            ),
-            const SizedBox(height: 16),
-            OnboardingOptionTile(
-              title: 'Семья',
-              isSelected: _selectedType == OnboardingType.family,
-              onTap: () => setState(() => _selectedType = OnboardingType.family),
-            ),
-            const Spacer(),
-            OnboardingNextButton(
-              isEnabled: _selectedType != null,
-              onPressed: () {
-                if (_selectedType != null) {
-                  context.read<OnboardingProvider>().setType(_selectedType!);
-                  context.read<OnboardingProvider>().nextPage();
-                }
-              },
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Выберите подходящий формат.',
+            style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+          ),
+          const SizedBox(height: 48),
+          OnboardingOptionTile(
+            title: 'Для пары',
+            isSelected: _selectedType == OnboardingType.couple,
+            onTap: () => setState(() => _selectedType = OnboardingType.couple),
+          ),
+          const SizedBox(height: 20),
+          OnboardingOptionTile(
+            title: 'Для семьи',
+            isSelected: _selectedType == OnboardingType.family,
+            onTap: () => setState(() => _selectedType = OnboardingType.family),
+          ),
+          const Spacer(),
+          OnboardingNextButton(
+            isEnabled: _selectedType != null,
+            onPressed: () {
+              if (_selectedType != null) {
+                context.read<OnboardingProvider>().setType(_selectedType!);
+                context.read<OnboardingProvider>().nextPage();
+              }
+            },
+          ),
+        ],
       ),
     );
   }

@@ -16,42 +16,48 @@ class _OnboardingStepFamilyScreenState extends State<OnboardingStepFamilyScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'У вас есть дети?',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+    final theme = Theme.of(context);
+    return Container(
+      color: Colors.transparent,
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'У вас есть дети?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF323755),
             ),
-            const SizedBox(height: 32),
-            OnboardingOptionTile(
-              title: 'Да',
-              isSelected: _hasChildren == true,
-              onTap: () => setState(() => _hasChildren = true),
-            ),
-            const SizedBox(height: 16),
-            OnboardingOptionTile(
-              title: 'Нет',
-              isSelected: _hasChildren == false,
-              onTap: () => setState(() => _hasChildren = false),
-            ),
-            const Spacer(),
-            OnboardingNextButton(
-              isEnabled: _hasChildren != null,
-              onPressed: () {
-                if (_hasChildren != null) {
-                  context.read<OnboardingProvider>().setHasChildren(_hasChildren!);
-                  context.read<OnboardingProvider>().nextPage();
-                }
-              },
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Это поможет нам подобрать правильные моменты.',
+            style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+          ),
+          const SizedBox(height: 48),
+          OnboardingOptionTile(
+            title: 'Да, есть',
+            isSelected: _hasChildren == true,
+            onTap: () => setState(() => _hasChildren = true),
+          ),
+          const SizedBox(height: 20),
+          OnboardingOptionTile(
+            title: 'Нет',
+            isSelected: _hasChildren == false,
+            onTap: () => setState(() => _hasChildren = false),
+          ),
+          const Spacer(),
+          OnboardingNextButton(
+            isEnabled: _hasChildren != null,
+            onPressed: () {
+              if (_hasChildren != null) {
+                context.read<OnboardingProvider>().setHasChildren(_hasChildren!);
+                context.read<OnboardingProvider>().nextPage();
+              }
+            },
+          ),
+        ],
       ),
     );
   }

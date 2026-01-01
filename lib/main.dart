@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jup/features/onboarding/data/datasources/onboarding_local_data_source.dart';
 import 'package:jup/features/onboarding/data/repositories/onboarding_repository_impl.dart';
 import 'package:jup/features/onboarding/domain/repositories/onboarding_repository.dart';
@@ -36,9 +37,7 @@ Future<Map<String, dynamic>> setupDependencies() async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final dependencies = await setupDependencies();
-
   runApp(
     MultiProvider(
       providers: [
@@ -52,7 +51,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final bool isOnboardingComplete;
-
   const MyApp({super.key, required this.isOnboardingComplete});
 
   @override
@@ -60,15 +58,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'JUP',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: Colors.white,
+        primaryColor: const Color(0xFFE94057),
+        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFFE94057), // Vibrant Pink
+          secondary: Color(0xFFF27121), // Orange accent for gradients
+          onPrimary: Colors.white,
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         appBarTheme: const AppBarTheme(
           elevation: 0,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          titleTextStyle: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        )
+          backgroundColor: Color(0xFFFFFFFF),
+          iconTheme: IconThemeData(color: Color(0xFF323755)),
+          titleTextStyle: TextStyle(
+              color: Color(0xFF323755), fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute:
           isOnboardingComplete ? HomeScreen.routeName : OnboardingRoutes.onboardingFlow,
@@ -84,7 +89,6 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

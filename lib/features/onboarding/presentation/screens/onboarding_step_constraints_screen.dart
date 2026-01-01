@@ -15,8 +15,8 @@ class OnboardingStepConstraintsScreen extends StatefulWidget {
 
 class _OnboardingStepConstraintsScreenState extends State<OnboardingStepConstraintsScreen> {
   final List<OnboardingConstraint> _availableConstraints = [
-    OnboardingConstraint(id: 'alcohol', name: 'Алкоголь'),
-    OnboardingConstraint(id: 'activity', name: 'Активность'),
+    OnboardingConstraint(id: 'alcohol', name: 'Без алкоголя'),
+    OnboardingConstraint(id: 'activity', name: 'Спокойный отдых'),
   ];
   
   final List<OnboardingConstraint> _selectedConstraints = [];
@@ -33,29 +33,36 @@ class _OnboardingStepConstraintsScreenState extends State<OnboardingStepConstrai
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Есть ли у вас ограничения?',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+    final theme = Theme.of(context);
+    return Container(
+      color: Colors.transparent,
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Ограничения?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF323755),
             ),
-            const SizedBox(height: 32),
-            ..._availableConstraints.map((constraint) => Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Выберите, если что-то не подходит.',
+            style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+          ),
+          const SizedBox(height: 48),
+          ..._availableConstraints.map((constraint) => Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
               child: OnboardingOptionTile(
                 title: constraint.name,
                 isSelected: _selectedConstraints.any((c) => c.id == constraint.id),
                 onTap: () => _toggleConstraint(constraint),
               ),
             )),
-            const Spacer(),
-            OnboardingNextButton(
+          const Spacer(),
+          OnboardingNextButton(
               text: 'Завершить',
               isEnabled: true, // User can have no constraints
               onPressed: () async {
@@ -70,8 +77,7 @@ class _OnboardingStepConstraintsScreenState extends State<OnboardingStepConstrai
                 }
               },
             ),
-          ],
-        ),
+        ],
       ),
     );
   }

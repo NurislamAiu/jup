@@ -17,48 +17,54 @@ class _OnboardingStepSurpriseScreenState extends State<OnboardingStepSurpriseScr
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Какой уровень сюрприза вам нравится?',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+    final theme = Theme.of(context);
+    return Container(
+      color: Colors.transparent,
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Уровень сюрприза?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF323755),
             ),
-            const SizedBox(height: 32),
-            OnboardingOptionTile(
-              title: 'Низкий',
-              isSelected: _selectedLevel == OnboardingSurpriseLevel.low,
-              onTap: () => setState(() => _selectedLevel = OnboardingSurpriseLevel.low),
-            ),
-            const SizedBox(height: 16),
-            OnboardingOptionTile(
-              title: 'Средний',
-              isSelected: _selectedLevel == OnboardingSurpriseLevel.medium,
-              onTap: () => setState(() => _selectedLevel = OnboardingSurpriseLevel.medium),
-            ),
-            const SizedBox(height: 16),
-            OnboardingOptionTile(
-              title: 'Высокий',
-              isSelected: _selectedLevel == OnboardingSurpriseLevel.high,
-              onTap: () => setState(() => _selectedLevel = OnboardingSurpriseLevel.high),
-            ),
-            const Spacer(),
-            OnboardingNextButton(
-              isEnabled: _selectedLevel != null,
-              onPressed: () {
-                if (_selectedLevel != null) {
-                  context.read<OnboardingProvider>().setSurpriseLevel(_selectedLevel!);
-                  context.read<OnboardingProvider>().nextPage();
-                }
-              },
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Насколько вы готовы довериться нам?',
+            style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+          ),
+          const SizedBox(height: 48),
+          OnboardingOptionTile(
+            title: 'Низкий',
+            isSelected: _selectedLevel == OnboardingSurpriseLevel.low,
+            onTap: () => setState(() => _selectedLevel = OnboardingSurpriseLevel.low),
+          ),
+          const SizedBox(height: 20),
+          OnboardingOptionTile(
+            title: 'Средний',
+            isSelected: _selectedLevel == OnboardingSurpriseLevel.medium,
+            onTap: () => setState(() => _selectedLevel = OnboardingSurpriseLevel.medium),
+          ),
+          const SizedBox(height: 20),
+          OnboardingOptionTile(
+            title: 'Высокий',
+            isSelected: _selectedLevel == OnboardingSurpriseLevel.high,
+            onTap: () => setState(() => _selectedLevel = OnboardingSurpriseLevel.high),
+          ),
+          const Spacer(),
+          OnboardingNextButton(
+            isEnabled: _selectedLevel != null,
+            onPressed: () {
+              if (_selectedLevel != null) {
+                context.read<OnboardingProvider>().setSurpriseLevel(_selectedLevel!);
+                context.read<OnboardingProvider>().nextPage();
+              }
+            },
+          ),
+        ],
       ),
     );
   }

@@ -17,34 +17,40 @@ class _OnboardingStepFrequencyScreenState extends State<OnboardingStepFrequencyS
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Как часто вы хотите проводить время вместе?',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+    final theme = Theme.of(context);
+    return Container(
+      color: Colors.transparent,
+      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Как часто?',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF323755),
             ),
-            const SizedBox(height: 32),
-            OnboardingOptionTile(
-              title: '1 раз в месяц',
-              isSelected: true, // Always selected for MVP
-              onTap: () {},
-            ),
-            const Spacer(),
-            OnboardingNextButton(
-              isEnabled: true,
-              onPressed: () {
-                context.read<OnboardingProvider>().setFrequency(_frequency);
-                context.read<OnboardingProvider>().nextPage();
-              },
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Начнём с одного раза в месяц.',
+            style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+          ),
+          const SizedBox(height: 48),
+          OnboardingOptionTile(
+            title: 'Один раз в месяц',
+            isSelected: true, // Always selected for MVP
+            onTap: () {},
+          ),
+          const Spacer(),
+          OnboardingNextButton(
+            isEnabled: true,
+            onPressed: () {
+              context.read<OnboardingProvider>().setFrequency(_frequency);
+              context.read<OnboardingProvider>().nextPage();
+            },
+          ),
+        ],
       ),
     );
   }
