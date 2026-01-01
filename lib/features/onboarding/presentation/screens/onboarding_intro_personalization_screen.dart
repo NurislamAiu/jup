@@ -15,11 +15,11 @@ class OnboardingIntroPersonalizationScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          // Placeholder for a beautiful illustration or animation
-          Icon(
-            Icons.tune,
-            size: 100,
-            color: theme.primaryColor,
+          Image.asset(
+            'assets/images/intro_personalization.png',
+            height: 200, // Adjust the size as needed
+             errorBuilder: (context, error, stackTrace) => 
+              const Icon(Icons.tune, size: 100), // Placeholder on error
           ),
           const SizedBox(height: 40),
           Text(

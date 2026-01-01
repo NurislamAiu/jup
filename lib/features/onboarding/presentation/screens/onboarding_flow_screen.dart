@@ -20,6 +20,7 @@ class OnboardingFlowScreen extends StatefulWidget {
 
 class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
   late final PageController _pageController;
+  late final OnboardingProvider _provider;
 
   final List<Widget> _screens = const [
     // Intro screens
@@ -40,12 +41,15 @@ class _OnboardingFlowScreenState extends State<OnboardingFlowScreen> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    context.read<OnboardingProvider>().addListener(_onPageChange);
+    // Get the provider reference here, when the context is active.
+    _provider = context.read<OnboardingProvider>();
+    _provider.addListener(_onPageChange);
   }
 
   @override
   void dispose() {
-    context.read<OnboardingProvider>().removeListener(_onPageChange);
+    // Use the stored provider reference to safely remove the listener.
+    _provider.removeListener(_onPageChange);
     _pageController.dispose();
     super.dispose();
   }

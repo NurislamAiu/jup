@@ -15,11 +15,11 @@ class OnboardingIntroWelcomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(),
-          // Placeholder for a beautiful illustration or animation
-          Icon(
-            Icons.auto_awesome,
-            size: 100,
-            color: theme.primaryColor,
+          Image.asset(
+            'assets/images/intro_magic.png',
+            height: 200, // Adjust the size as needed
+            errorBuilder: (context, error, stackTrace) => 
+              const Icon(Icons.auto_awesome, size: 100), // Placeholder on error
           ),
           const SizedBox(height: 40),
           Text(

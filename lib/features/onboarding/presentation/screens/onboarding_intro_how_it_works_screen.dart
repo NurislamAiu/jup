@@ -25,21 +25,21 @@ class OnboardingIntroHowItWorksScreen extends StatelessWidget {
           const SizedBox(height: 48),
           _buildStep(
             context,
-            icon: Icons.edit_note,
+            assetPath: 'assets/images/icon_form.png',
             title: 'Шаг 1: Анкета',
             subtitle: 'Вы отвечаете на несколько вопросов, чтобы мы узнали вас лучше.',
           ),
           const SizedBox(height: 32),
           _buildStep(
             context,
-            icon: Icons.card_giftcard,
+            assetPath: 'assets/images/icon_surprise.png',
             title: 'Шаг 2: Сюрприз',
             subtitle: 'Мы готовим уникальное событие, держа детали в секрете до нужного часа.',
           ),
           const SizedBox(height: 32),
           _buildStep(
             context,
-            icon: Icons.favorite,
+            assetPath: 'assets/images/icon_enjoy.png',
             title: 'Шаг 3: Наслаждение',
             subtitle: 'Вы просто приходите в назначенное время и наслаждаетесь моментом.',
           ),
@@ -56,12 +56,12 @@ class OnboardingIntroHowItWorksScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStep(BuildContext context, {required IconData icon, required String title, required String subtitle}) {
+  Widget _buildStep(BuildContext context, {required String assetPath, required String title, required String subtitle}) {
     final theme = Theme.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 40, color: theme.primaryColor),
+        Image.asset(assetPath, height: 40, width: 40),
         const SizedBox(width: 20),
         Expanded(
           child: Column(
