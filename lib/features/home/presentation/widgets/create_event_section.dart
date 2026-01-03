@@ -12,20 +12,41 @@ class CreateEventSection extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
           child: Text(
             'Создайте Момент',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF3D3632)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF3D3632),
+              letterSpacing: 0.2,
+            ),
           ),
         ),
         SizedBox(
-          height: 130,
+          height: 130, // Увеличена высота для карточек, чтобы избежать переполнения
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             children: const [
-              SizedBox(width: 4),
-              _EventCard(title: 'Настроение', icon: Icons.sentiment_satisfied_alt_outlined),
-              _EventCard(title: 'Место', icon: Icons.location_on_outlined),
-              _EventCard(title: 'Энергия', icon: Icons.flash_on_outlined),
-              _EventCard(title: 'Сюрприз', icon: Icons.star_border_outlined),
+              SizedBox(width: 8),
+              _EventCard(
+                title: 'Настроение',
+                assetPath: 'assets/images/mood.png',
+              ),
+              SizedBox(width: 8),
+              _EventCard(
+                title: 'Место',
+                assetPath: 'assets/images/location.png',
+              ),
+              SizedBox(width: 8),
+              _EventCard(
+                title: 'Энергия',
+                assetPath: 'assets/images/energy.png',
+              ),
+              SizedBox(width: 8),
+              _EventCard(
+                title: 'Сюрприз',
+                assetPath: 'assets/images/icon_surprise.png',
+              ),
+              SizedBox(width: 8),
             ],
           ),
         ),
@@ -36,29 +57,55 @@ class CreateEventSection extends StatelessWidget {
 
 class _EventCard extends StatelessWidget {
   final String title;
-  final IconData icon;
-  const _EventCard({required this.title, required this.icon});
+  final String assetPath;
+
+  const _EventCard({super.key, required this.title, required this.assetPath});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 110,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: 120,
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F1EE),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFEAE2DD), width: 1.5),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: const Color(0xFF3D3632), size: 36),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF3D3632), fontSize: 15),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            spreadRadius: 0,
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
         ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          highlightColor: const Color(0xFFD4A373).withOpacity(0.08),
+          splashColor: const Color(0xFFD4A373).withOpacity(0.15),
+          onTap: () {
+            print('Нажата карточка: $title');
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(assetPath, width: 46, height: 46),
+                const SizedBox(height: 12),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF3D3632),
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const Color primaryText = Color(0xFF4B423F); // Soft dark text
-    const Color accentColor = Color(0xFFE5BDB2); // Dusty rose
+    const Color accentColor = Color(0xFFC78B7F); // A slightly darker, more visible dusty rose
     const Color bgColor = Color(0xFFFBF9F4); // Warm ivory
 
     return MaterialApp(

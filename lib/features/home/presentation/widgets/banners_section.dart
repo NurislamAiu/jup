@@ -9,21 +9,35 @@ class BannersSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.fromLTRB(20, 32, 20, 12),
+          padding: EdgeInsets.fromLTRB(20, 32, 20, 16),
           child: Text(
             'Забота и Внимание',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF4B423F)),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF3D3632),
+              letterSpacing: 0.3,
+            ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            children: const [
-              _BannerCard(title: 'Цветы и Забота', icon: Icons.filter_vintage_outlined),
-              SizedBox(height: 12),
-              _BannerCard(title: 'Адвент-календари', icon: Icons.calendar_today_outlined),
-              SizedBox(height: 12),
-              _BannerCard(title: 'Домашние впечатления', icon: Icons.home_outlined),
+            children: [
+              _BannerCard(
+                title: 'Цветы и Забота',
+                assetPath: 'assets/images/icon_enjoy.png',
+              ),
+              const SizedBox(height: 14),
+              _BannerCard(
+                title: 'Адвент-календари',
+                assetPath: 'assets/images/calendar.png',
+              ),
+              const SizedBox(height: 14),
+              _BannerCard(
+                title: 'Домашние впечатления',
+                assetPath: 'assets/images/home_experience.png',
+              ),
             ],
           ),
         ),
@@ -34,28 +48,61 @@ class BannersSection extends StatelessWidget {
 
 class _BannerCard extends StatelessWidget {
   final String title;
-  final IconData icon;
-  const _BannerCard({required this.title, required this.icon});
+  final String assetPath;
+
+  const _BannerCard({super.key, required this.title, required this.assetPath});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-        child: Row(
-          children: [
-            Icon(icon, color: const Color(0xFF4B423F), size: 28),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF4B423F)),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            spreadRadius: 0,
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(24),
+          highlightColor: const Color(0xFFD4A373).withOpacity(0.1),
+          splashColor: const Color(0xFFD4A373).withOpacity(0.2),
+          onTap: () {
+            print('Нажат баннер: $title');
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+            child: Row(
+              children: [
+                Image.asset(assetPath, width: 46, height: 46),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF3D3632),
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: const Color(0xFF4B423F).withOpacity(0.6),
+                  size: 20,
+                ),
+              ],
             ),
-            const Spacer(),
-            const Icon(Icons.arrow_forward_ios, color: Color(0xFF4B423F), size: 16),
-          ],
+          ),
         ),
       ),
     );
