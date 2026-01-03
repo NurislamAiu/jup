@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jup/features/home/home_routes.dart';
 import 'package:jup/features/onboarding/domain/entities/onboarding_profile.dart';
 import 'package:jup/features/onboarding/presentation/providers/onboarding_provider.dart';
 import 'package:jup/features/onboarding/presentation/widgets/onboarding_next_button.dart';
 import 'package:jup/features/onboarding/presentation/widgets/onboarding_option_tile.dart';
-import 'package:jup/main.dart';
 import 'package:provider/provider.dart';
 
 class OnboardingStepConstraintsScreen extends StatefulWidget {
@@ -73,7 +73,7 @@ class _OnboardingStepConstraintsScreenState extends State<OnboardingStepConstrai
                 await provider.finishOnboarding();
                 
                 if (mounted) {
-                   Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+                   Navigator.of(context).pushReplacementNamed(HomeRoutes.home);
                 }
               },
             ),
