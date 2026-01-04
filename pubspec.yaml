@@ -19,7 +19,8 @@ dependencies:
   flutter_native_splash: ^2.4.7
   shimmer: ^3.0.0
   curved_navigation_bar: ^1.0.3
-  salomon_bottom_bar: ^3.3.2 # Added salomon_bottom_bar
+  salomon_bottom_bar: ^3.3.2
+  iconsax: ^0.0.8 # Added iconsax dependency
 
 dev_dependencies:
   flutter_test:

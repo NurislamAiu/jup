@@ -6,7 +6,8 @@ import 'package:jup/features/home/presentation/widgets/banners_section.dart';
 import 'package:jup/features/home/presentation/widgets/create_event_section.dart';
 import 'package:jup/features/home/presentation/widgets/empty_moment_widget.dart';
 import 'package:jup/features/home/presentation/widgets/moment_card.dart';
-import 'package:jup/features/home/presentation/widgets/packages_section.dart';
+// import 'package:jup/features/home/presentation/widgets/packages_section.dart'; // Old import, remove or comment out
+import 'package:jup/features/packages/presentation/widgets/packages_section.dart'; // New import for PackagesSection
 import 'package:jup/features/home/presentation/widgets/tips_section.dart';
 import 'package:jup/features/home/presentation/widgets/countdown_dialog.dart';
 import 'package:jup/features/home/presentation/widgets/dress_code_detail_dialog.dart';
@@ -69,7 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Consumer<HomeProvider>(
         builder: (context, provider, child) {
           if (provider.state == HomeState.loading || provider.state == HomeState.initial) {
-            // Используем вынесенный виджет для эффекта shimmer
             return const HomeLoadingShimmer();
           }
           if (provider.state == HomeState.error) {

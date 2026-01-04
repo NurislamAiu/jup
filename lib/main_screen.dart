@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart'; // Import Iconsax
 import 'package:jup/features/home/presentation/screens/home_screen.dart'; // Import your existing home screen
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart'; // Import the salomon_bottom_bar package
 
@@ -25,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
     final Color primaryColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background, // Set scaffold background to theme background
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(10),
@@ -37,27 +39,27 @@ class _MainScreenState extends State<MainScreen> {
             selectedColorOpacity: 0.2,
             items: [
               SalomonBottomBarItem(
-                icon: const Icon(Icons.home_outlined),
+                icon: const Icon(Iconsax.home),
                 title: const Text('Home'),
                 selectedColor: primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.explore_outlined),
+                icon: const Icon(Iconsax.activity),
                 title: const Text('Discover'),
                 selectedColor: primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.person_outlined),
+                icon: const Icon(Iconsax.user),
                 title: const Text('Profile'),
                 selectedColor: primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.favorite_outlined),
+                icon: const Icon(Iconsax.heart),
                 title: const Text('Favorites'),
                 selectedColor: primaryColor,
               ),
               SalomonBottomBarItem(
-                icon: const Icon(Icons.settings_outlined),
+                icon: const Icon(Iconsax.setting),
                 title: const Text('Settings'),
                 selectedColor: primaryColor,
               ),

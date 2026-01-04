@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jup/features/home/domain/entities/package.dart'; // Import the Package model
-import 'package:jup/features/home/home_routes.dart'; // Import home_routes to use route names
+import 'package:jup/features/packages/domain/entities/package.dart'; // Updated import for Package model
+import 'package:jup/features/packages/packages_routes.dart'; // Updated import for packages_routes
 
 class PackagesSection extends StatelessWidget {
   const PackagesSection({super.key});
@@ -96,6 +96,7 @@ class _PackageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 270,
+      height: 210, // Fixed height to prevent overflow in its Column child
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [package.startColor, package.endColor],
@@ -121,7 +122,7 @@ class _PackageCard extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(
               context,
-              HomeRoutes.packageDetail,
+              PackagesRoutes.packageDetail,
               arguments: package,
             );
           },
@@ -144,7 +145,7 @@ class _PackageCard extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         package.description,
-                        style: TextStyle(fontSize: 16, color: const Color(0xFF3D3632).withOpacity(0.8), height: 1.4),
+                        style: TextStyle(fontSize: 16, color: const Color(0xFF3D3232).withOpacity(0.8), height: 1.4),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -153,7 +154,7 @@ class _PackageCard extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: Icon(Icons.arrow_forward_ios, color: const Color(0xFF3D3632).withOpacity(0.6), size: 20),
+                  child: Icon(Icons.arrow_forward_ios, color: const Color(0xFF3D3232).withOpacity(0.6), size: 20),
                 ),
               ],
             ),

@@ -16,6 +16,7 @@ import 'package:jup/features/onboarding/onboarding_routes.dart';
 import 'package:jup/features/onboarding/presentation/providers/onboarding_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jup/features/packages/packages_routes.dart'; // Import new packages routes
 
 // DI Setup remains the same...
 Future<Map<String, dynamic>> setupDependencies() async {
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
       routes: {
         ...OnboardingRoutes.routes,
         ...HomeRoutes.routes,
+        ...PackagesRoutes.routes, // Add packages routes
       },
     );
   }
